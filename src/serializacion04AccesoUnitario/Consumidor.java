@@ -1,5 +1,6 @@
 package serializacion04AccesoUnitario;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,22 +12,25 @@ public class Consumidor {
 
 	public static void main(String[] args) {
 		Consumidor consumidor = new Consumidor();
-		Object obtenerObjeto = consumidor.obtenerObjeto(1);
-		obtenerObjeto.toString();
+		Object obtenerObjeto = consumidor.obtenerObjeto(3);
 	}
 
 	public Object obtenerObjeto(int posicion) {
 		ObjectInputStream deserilizador = null;
-		Object readObject=null;
+		Object readObject = null;
 		try {
-			deserilizador=new ObjectInputStream(new FileInputStream("clientes.dat"));
-			int contador=1;
-			while(contador++<=posicion) {
-				readObject = deserilizador.readObject();
+			deserilizador = new ObjectInputStream(new FileInputStream("clientes.dat"));
+			if (deserilizador != null) {
+				int contador = 1;
+				while (contador++ <= posicion) {
+					readObject = deserilizador.readObject();
+				}
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			readObject = null;
+		} catch (EOFException e) {
+			readObject = null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,9 +40,7 @@ public class Consumidor {
 		}
 		try {
 			deserilizador.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
 		}
 		return readObject;
 	}
