@@ -46,7 +46,7 @@ public class AdaptadorMonoObjetoSerializable<S extends Serializable> implements 
 		ObjectOutputStream serializador = null;
 		boolean retorno=false;
 		try {
-			serializador=new ObjectOutputStream(new FileOutputStream("cliente.dat"));
+			serializador=new ObjectOutputStream(new FileOutputStream(path));
 			serializador.writeObject(objeto);
 			retorno=true;
 		} catch (FileNotFoundException e) {

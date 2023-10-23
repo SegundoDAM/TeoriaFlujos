@@ -2,11 +2,7 @@ package ejercicio06;
 
 import java.io.Serializable;
 
-public class Articulo implements Serializable{
-
-	/**
-	 * 
-	 */
+public class Articulo implements Serializable,Keyable<String>{
 	private static final long serialVersionUID = 1L;
 	private int numeroID;
 	private String nombre;
@@ -70,5 +66,10 @@ public class Articulo implements Serializable{
 		// que tratamos podemos complicarlo un poco tanto como queramos dentro de las
 		// leyes
 		return hash * this.numeroID + this.nombre.hashCode();
+	}
+
+	@Override
+	public String getKey() {
+		return nombre;
 	}
 }

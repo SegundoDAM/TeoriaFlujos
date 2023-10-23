@@ -24,7 +24,7 @@ public class AdaptadorMultiobjetoSerializable<T extends Serializable> implements
 		ObjectInputStream deserilizador = null;
 		Object readObject = null;
 		try {
-			deserilizador = new ObjectInputStream(new FileInputStream("clientes.dat"));
+			deserilizador = new ObjectInputStream(new FileInputStream(path));
 			if (deserilizador != null) {
 				int contador = 1;
 				while (contador++ <= posicion) {
